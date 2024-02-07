@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Information Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="carForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" maxlength="20" pattern="[A-Za-z]+" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" maxlength="20" pattern="[A-Za-z]+" required>
+
+        <label for="manufacturer">Car Manufacturer:</label>
+        <input type="text" id="manufacturer" name="manufacturer" maxlength="20" pattern="[A-Za-z]+" required>
+
+        <label for="carModel">Car Model:</label>
+        <input type="text" id="carModel" name="carModel" maxlength="20" required>
+
+        <label for="carRegPlate">Car Registration Plate:</label>
+        <input type="text" id="carRegPlate" name="carRegPlate" maxlength="20" required>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <table id="carTable">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Car Manufacturer</th>
+            <th>Car Model</th>
+            <th>Car Reg Plate</th>
+        </tr>
+    </table>
+
+    <script>
+        function submitForm() {
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var manufacturer = document.getElementById("manufacturer").value;
+            var carModel = document.getElementById("carModel").value;
+            var carRegPlate = document.getElementById("carRegPlate").value;
+
+            if (validateInput(firstName, lastName, manufacturer, carModel, carRegPlate)) {
+                var table = document.getElementById("carTable");
+                //var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                cell1.innerHTML = firstName;
+                cell2.innerHTML = lastName;
+                cell3.innerHTML = manufacturer;
+                cell4.innerHTML = carModel;
+                cell5.innerHTML = carRegPlate;
+
+                // Clear the form
+                document.getElementById("carForm").reset();
+            }
+        }
+
+        function validateInput(firstName, lastName, manufacturer, carModel, carRegPlate) {
+            var regex = /^[A-Za-z]+$/;
+
+            if (!regex.test(firstName) || !regex.test(lastName) || !regex.test(manufacturer)) {
+                alert("Invalid characters in First Name, Last Name, or Car Manufacturer fields.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+</body>
+</html>
